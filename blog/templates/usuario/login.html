@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load meus_filtros %}
+
+{% block header %}
+  <header class="masthead" style="background-image: url('{% static  'blog/img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>TreinaWeb Blog</h1>
+            <span class="subheading">Autentique-se no melhor blog do Brasil!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        {{form_login.username.errors}}
+        <label>Username: </label>
+        {{form_login.username|addclass:'form-control'}}
+    </div>
+
+    <div class="form-group">
+        {{form_login.password.errors}}
+        <label>Senha: </label>
+        {{form_login.password|addclass:'form-control'}}
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Enviar" class="btn btn-primary">
+    </div>
+</form>
+{% endblock content %}
