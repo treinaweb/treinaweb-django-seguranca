@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from admin_blog.services import post_service, comentario_service
 from admin_blog.forms import comentario_form
 from admin_blog.entidades.comentario import Comentario
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -22,3 +23,13 @@ def listar_post_id(request, id):
     else:
         form_comentario = comentario_form.ComentarioForm()
     return render(request, 'blog/post.html', {'post': post, 'comentarios': comentarios, 'form_comentario': form_comentario})
+
+def cadastrar_usuario(request):
+    if request.method == "POST":
+        form_usuario = UserCreationForm(request.POST)
+        if form_usuario.is_valid():
+            form_usuario.save()
+            return redirect('home')
+    else:
+        form_usuario = UserCreationForm()
+    return render(request, 'usuario/cadastro.html', {'form_usuario': form_usuario})
