@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{% static  'blog/img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>TreinaWeb Blog</h1>
+            <span class="subheading">Tudo sobre tecnologia e desenvolvimento</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+
+{% block content %}
+{% for post in posts %}
+<div class="post-preview">
+  <a href="{% url 'listar_post' post.id %}">
+    <h2 class="post-title">
+      {{ post.titulo }}
+    </h2>
+    <h3 class="post-subtitle">
+      {{ post.descricao }}
+    </h3>
+  </a>
+  <p class="post-meta">Postado por
+    <a href="#">Nome do autor</a>
+    em {{post.data_cadastro}}</p>
+</div>
+{% endfor %}
+{% endblock content %}

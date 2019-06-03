@@ -1,0 +1,13 @@
+{% extends 'admin_blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Tem certeza que deseja remover o Post?</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim</button>
+    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-warning">Voltar</a>
+</form>
+
+{% endblock content %}

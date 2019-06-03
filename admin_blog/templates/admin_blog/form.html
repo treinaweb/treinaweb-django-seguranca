@@ -1,0 +1,37 @@
+{% extends 'admin_blog/base.html' %}
+{% load meus_filtros %}
+{% load static %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{form_post.titulo.errors}}
+        <label>Titulo: </label>
+        {{ form_post.titulo|addclass:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{form_post.descricao.errors}}
+        <label>Descricao: </label>
+        {{ form_post.descricao|addclass:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{form_post.conteudo.errors}}
+        <label>Conteudo: </label>
+        {{ form_post.conteudo|addclass:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{form_post.categoria.errors}}
+        <label>Categoria: </label>
+        {{ form_post.categoria|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cadastrar" class="btn btn-primary">
+    </div>
+</form>
+
+{% endblock content %}
