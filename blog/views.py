@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from admin_blog.services import post_service, comentario_service, usuario_service
-from admin_blog.forms import comentario_form, usuario_form
+from admin_blog.forms import comentario_form, usuario_form, login_form
 from admin_blog.entidades.comentario import Comentario
 from admin_blog.entidades.usuario import Usuario
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -44,14 +44,16 @@ def cadastrar_usuario(request):
 
 def logar_usuario(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        usuario = authenticate(request, username=username, password=password)
-        if usuario is not None:
-            login(request, usuario)
-            return redirect('home')
-        else:
-            form_login = AuthenticationForm()
+        form_login = login_form.LoginForm(data=request.POST)
+        if form_login.is_valid():
+            username = form_login.cleaned_data["username"]
+            password = form_login.cleaned_data["password"]
+            usuario = authenticate(request, username=username, password=password)
+            if usuario is not None:
+                login(request, usuario)
+                return redirect('home')
+            else:
+                form_login = login_form.LoginForm()
     else:
-        form_login = AuthenticationForm()
+        form_login = login_form.LoginForm()
     return render(request, 'usuario/login.html', {'form_login': form_login})
