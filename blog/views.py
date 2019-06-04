@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from admin_blog.services import post_service, comentario_service
-from admin_blog.forms import comentario_form
+from admin_blog.services import post_service, comentario_service, usuario_service
+from admin_blog.forms import comentario_form, usuario_form
 from admin_blog.entidades.comentario import Comentario
+from admin_blog.entidades.usuario import Usuario
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from django.contrib.auth import authenticate, login
@@ -28,12 +29,17 @@ def listar_post_id(request, id):
 
 def cadastrar_usuario(request):
     if request.method == "POST":
-        form_usuario = UserCreationForm(request.POST)
+        form_usuario = usuario_form.UsuarioForm(data=request.POST)
         if form_usuario.is_valid():
-            form_usuario.save()
+            nome = form_usuario.cleaned_data["nome"]
+            email = form_usuario.cleaned_data["email"]
+            pais_origem = form_usuario.cleaned_data["pais_origem"]
+            password = form_usuario.cleaned_data["password1"]
+            usuario_novo = Usuario(nome=nome, email=email, pais_origem=pais_origem, password=password)
+            usuario_service.cadastrar_usuario(usuario_novo)
             return redirect('home')
     else:
-        form_usuario = UserCreationForm()
+        form_usuario = usuario_form.UsuarioForm()
     return render(request, 'usuario/cadastro.html', {'form_usuario': form_usuario})
 
 def logar_usuario(request):

@@ -23,9 +23,21 @@
     {% csrf_token %}
 
     <div class="form-group">
-        {{form_usuario.username.errors}}
-        <label>Username: </label>
-        {{form_usuario.username|addclass:'form-control'}}
+        {{form_usuario.email.errors}}
+        <label>Email: </label>
+        {{form_usuario.email|addclass:'form-control'}}
+    </div>
+
+    <div class="form-group">
+        {{form_usuario.nome.errors}}
+        <label>Nome: </label>
+        {{form_usuario.nome|addclass:'form-control'}}
+    </div>
+
+    <div class="form-group">
+        {{form_usuario.pais_origem.errors}}
+        <label>País de origem: </label>
+        {{form_usuario.pais_origem|addclass:'form-control'}}
     </div>
 
     <div class="form-group">
