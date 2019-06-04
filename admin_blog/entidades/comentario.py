@@ -1,7 +1,8 @@
 class Comentario():
-    def __init__(self, conteudo, post):
+    def __init__(self, conteudo, post, usuario):
         self.__conteudo = conteudo
         self.__post = post
+        self.__usuario = usuario
 
     @property
     def conteudo(self):
@@ -18,3 +19,11 @@ class Comentario():
     @post.setter
     def post(self, post):
         self.__post = post
+
+    @property
+    def usuario(self):
+        return self.__usuario
+
+    @usuario.setter
+    def usuario(self, usuario):
+        self.__usuario = usuario

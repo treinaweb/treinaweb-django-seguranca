@@ -20,7 +20,8 @@ def listar_post_id(request, id):
         form_comentario = comentario_form.ComentarioForm(request.POST)
         if form_comentario.is_valid():
             conteudo = form_comentario.cleaned_data["conteudo"]
-            comentario_novo = Comentario(conteudo=conteudo, post=post)
+            usuario = request.user
+            comentario_novo = Comentario(conteudo=conteudo, post=post, usuario=usuario)
             comentario_service.cadastrar_comentario(comentario_novo)
             return redirect('listar_post', post.id)
     else:
