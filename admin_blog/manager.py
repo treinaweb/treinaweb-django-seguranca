@@ -1,7 +1,7 @@
 from django.contrib.auth.models import BaseUserManager
 
 class UsuarioManager(BaseUserManager):
-    def create_user(self, nome, email, pais_origem, password):
+    def create_user(self, email, nome=None, pais_origem=None, password=None):
         if not email:
             raise ValueError("O usuário precisa de um email")
         usuario = self.model(
