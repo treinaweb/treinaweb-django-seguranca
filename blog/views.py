@@ -17,13 +17,16 @@ def listar_post_id(request, id):
     post = post_service.listar_post_id(id)
     comentarios = comentario_service.listar_comentarios(id)
     if request.method == "POST":
-        form_comentario = comentario_form.ComentarioForm(request.POST)
-        if form_comentario.is_valid():
-            conteudo = form_comentario.cleaned_data["conteudo"]
-            usuario = request.user
-            comentario_novo = Comentario(conteudo=conteudo, post=post, usuario=usuario)
-            comentario_service.cadastrar_comentario(comentario_novo)
-            return redirect('listar_post', post.id)
+        if request.user.is_authenticated:
+            form_comentario = comentario_form.ComentarioForm(request.POST)
+            if form_comentario.is_valid():
+                conteudo = form_comentario.cleaned_data["conteudo"]
+                usuario = request.user
+                comentario_novo = Comentario(conteudo=conteudo, post=post, usuario=usuario)
+                comentario_service.cadastrar_comentario(comentario_novo)
+                return redirect('listar_post', post.id)
+        else:
+            return redirect('logar_usuario')
     else:
         form_comentario = comentario_form.ComentarioForm()
     return render(request, 'blog/post.html', {'post': post, 'comentarios': comentarios, 'form_comentario': form_comentario})
