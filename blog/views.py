@@ -5,7 +5,9 @@ from admin_blog.entidades.comentario import Comentario
 from admin_blog.entidades.usuario import Usuario
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -65,3 +67,15 @@ def logar_usuario(request):
 def deslogar_usuario(request):
     logout(request)
     return redirect('home')
+
+@login_required()
+def alterar_senha(request):
+    if request.method == "POST":
+        form_senha = PasswordChangeForm(request.user, request.POST)
+        if form_senha.is_valid():
+            user = form_senha.save()
+            update_session_auth_hash(request, user)
+            return redirect('home')
+    else:
+        form_senha = PasswordChangeForm(request.user)
+    return render(request, 'usuario/alterar_senha.html', {'form_senha': form_senha})
