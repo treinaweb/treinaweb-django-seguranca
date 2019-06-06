@@ -126,6 +126,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_by_email',
 )
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '579533006465-6f05ac4178t9hds58p57k2un8qjhfrmu.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OSmlOKuKJU3OHVOo_aDltlQI'
 
 AUTH_USER_MODEL = 'admin_blog.Usuario'
 
