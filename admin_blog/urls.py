@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
+app_name = 'admin_blog'
+
 urlpatterns = [
     path('listar_posts/', listar_posts, name='listar_posts'),
     path('editar_post/<int:id>', editar_post, name='editar_post'),
