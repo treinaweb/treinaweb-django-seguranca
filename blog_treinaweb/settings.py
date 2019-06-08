@@ -134,6 +134,7 @@ AUTH_USER_MODEL = 'admin_blog.Usuario'
 
 LOGIN_URL = 'logar_usuario'
 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL ='home'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

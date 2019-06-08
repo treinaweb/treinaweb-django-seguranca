@@ -8,4 +8,5 @@ urlpatterns = [
     path('logar_usuario/', logar_usuario, name='logar_usuario'),
     path('deslogar_usuario/', deslogar_usuario, name='deslogar_usuario'),
     path('alterar_senha/', alterar_senha, name='alterar_senha'),
+    path('perfil_usuario/', perfil_usuario, name='perfil_usuario'),
 ]
