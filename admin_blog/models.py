@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manager import UsuarioManager
 
 # Create your models here.
 
-class Usuario(AbstractBaseUser):
+class Usuario(AbstractBaseUser, PermissionsMixin):
     objects = UsuarioManager()
 
     nome = models.CharField(max_length=100, null=True, blank=False)
