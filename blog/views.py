@@ -57,7 +57,10 @@ def logar_usuario(request):
             usuario = authenticate(request, username=username, password=password)
             if usuario is not None:
                 login(request, usuario)
-                return redirect('home')
+                if usuario.is_superuser:
+                    return redirect('admin_blog:listar_posts')
+                else:
+                    return redirect('home')
             else:
                 form_login = login_form.LoginForm()
     else:
