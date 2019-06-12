@@ -13,13 +13,14 @@ def listar_posts(request):
 @user_passes_test(lambda u: u.is_superuser)
 def cadastrar_post(request):
     if request.method == "POST":
-        form_post = post_form.PostForm(request.POST)
+        form_post = post_form.PostForm(request.POST, request.FILES)
         if form_post.is_valid():
             titulo = form_post.cleaned_data["titulo"]
             descricao = form_post.cleaned_data["descricao"]
             conteudo = form_post.cleaned_data["conteudo"]
             categoria = form_post.cleaned_data["categoria"]
-            post_novo = Post(titulo=titulo, descricao=descricao, conteudo=conteudo, categoria=categoria)
+            capa = form_post.cleaned_data["capa"]
+            post_novo = Post(titulo=titulo, descricao=descricao, conteudo=conteudo, categoria=categoria, capa=capa)
             post_service.cadastrar_post(post_novo)
             return redirect('home')
     else:
