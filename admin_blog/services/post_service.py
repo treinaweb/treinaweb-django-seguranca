@@ -1,4 +1,5 @@
 from ..models import *
+from django.db import connection
 
 def listar_posts():
     posts = Post.objects.all()
@@ -13,6 +14,10 @@ def cadastrar_post(post):
                         categoria=post.categoria)
 
 def editar_post(post, post_novo):
+    #with connection.cursor() as cursor:
+    #    titulo = "'Django Segurança', descricao='Não vejam este artigo'"
+    #    cursor.execute(f"UPDATE admin_blog_post SET titulo=%s WHERE id=1", [titulo])
+
     post.titulo = post_novo.titulo
     post.descricao = post_novo.descricao
     post.conteudo = post_novo.conteudo
