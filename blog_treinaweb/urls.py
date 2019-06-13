@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog_treinaweb import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin_blog/', include('admin_blog.urls', namespace='admin_blog')),
     path('blog/', include('blog.urls')),
     path('oauth/', include('social_django.urls', namespace='social'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
