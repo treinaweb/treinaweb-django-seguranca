@@ -1,6 +1,6 @@
-#### TreinaWeb: curso "Django - REST"
+#### TreinaWeb: curso "Django - Segurança"
 
-Repositório com o código produzido durante o curso "Django - REST".
+Repositório com o código produzido durante o curso "Django - Segurança".
 
 #### Ferramentas utilizadas no curso:
 
