@@ -6,7 +6,7 @@ django-upload-validator==1.0.2
 idna==2.8
 mysqlclient==1.4.2
 oauthlib==3.0.1
-Pillow==8.1.1
+Pillow==9.0.1
 pycparser==2.19
 PyJWT==1.7.1
 python-magic==0.4.15
